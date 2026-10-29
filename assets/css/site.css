@@ -211,6 +211,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
     margin-bottom: 0;
     padding-top: calc((2.25rem * 1.15 - .75rem * 1.4) / 2);
   }
+  .section > .wrap > .content { grid-column: 2; }
 }
 
 /* 3 · Approach */
@@ -229,7 +230,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
 }
 
 /* 4 · Founder */
-.role { margin-top: .5rem; }
+.role { margin-top: .5rem; font-weight: 700; }
 .founder .bio { margin-top: 1.25rem; }
 .facts {
   margin-top: 1.25rem;
@@ -353,7 +354,4 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
 .site-footer p { display: flex; flex-wrap: wrap; column-gap: .5em; }
 .site-footer a { color: var(--graphite); text-underline-offset: .2em; }
 .site-footer a:hover { color: var(--ink); }
-@media (max-width: 599.98px) {
-  .site-footer p { flex-direction: column; row-gap: .375rem; }
-  .site-footer .sep { display: none; }
-}
+.site-footer p > * { white-space: nowrap; }
