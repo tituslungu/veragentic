@@ -33,7 +33,7 @@ const ev = async (expr) => { const r = await send('Runtime.evaluate', { expressi
 
 let consoleMsgs = [], requests = [], navs = [], posts = [];
 // Default run: GA off and no endpoint (mailto fallback path), regardless of the shipped config.js.
-const BASE_CONFIG = 'window.VERAGENTIC=Object.freeze({MEASUREMENT_ID:"",FORM_ENDPOINT:""});';
+const BASE_CONFIG = 'window.VERAGENTIC=Object.freeze({MEASUREMENT_ID:"",FORM_ENDPOINT:"",FORM_ACCESS_KEY:""});';
 let configOverride = BASE_CONFIG, postStatus = 200;
 handlers.push(async (m) => {
   if (m.method === 'Runtime.consoleAPICalled') consoleMsgs.push(m.params.type + ': ' + m.params.args.map(a => a.value ?? a.description).join(' '));
@@ -49,7 +49,7 @@ handlers.push(async (m) => {
     if (request.url.includes('/mock-endpoint')) {
       posts.push(request);
       await sleep(300);
-      return send('Fetch.fulfillRequest', { requestId, responseCode: postStatus, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from(postStatus === 200 ? '{"success":"true","message":"The form was submitted successfully."}' : '{"success":"false"}').toString('base64') });
+      return send('Fetch.fulfillRequest', { requestId, responseCode: postStatus, responseHeaders: [{ name: 'Content-Type', value: 'application/json' }], body: Buffer.from(postStatus === 200 ? '{"success":true,"message":"Email sent successfully!"}' : '{"success":false,"message":"error"}').toString('base64') });
     }
     if (request.url.startsWith('https://www.googletagmanager.com/')) {
       return send('Fetch.fulfillRequest', { requestId, responseCode: 200, responseHeaders: [{ name: 'Content-Type', value: 'text/javascript' }], body: Buffer.from('/*stub*/').toString('base64') });
@@ -140,7 +140,7 @@ await setVal('#email', 'bad'); s = await state();
 ok('no validation on blur before first submit', s.emailErr === null);
 
 // 2. Endpoint + GA on, success path
-configOverride = 'window.VERAGENTIC=Object.freeze({MEASUREMENT_ID:"G-TEST000000",FORM_ENDPOINT:"/mock-endpoint"});';
+configOverride = 'window.VERAGENTIC=Object.freeze({MEASUREMENT_ID:"G-TEST000000",FORM_ENDPOINT:"/mock-endpoint",FORM_ACCESS_KEY:"test-key"});';
 postStatus = 200;
 await load();
 ok('GA script requested when ID set', requests.some(u => u.startsWith('https://www.googletagmanager.com/gtag/js?id=G-TEST000000')));

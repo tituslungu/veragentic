@@ -41,7 +41,8 @@
   var form = document.getElementById('inquiry-form');
   if (!form) return;
 
-  var endpoint = String(CFG.FORM_ENDPOINT || '').trim();
+  var accessKey = String(CFG.FORM_ACCESS_KEY || '').trim();
+  var endpoint = accessKey ? String(CFG.FORM_ENDPOINT || '').trim() : '';
   var summary = document.getElementById('error-summary');
   var summaryList = summary.querySelector('ul');
   var failure = document.getElementById('form-failure');
@@ -173,21 +174,19 @@
     setSending(true);
     failure.hidden = true;
 
-    // FormSubmit (formsubmit.co) relays the inquiry by email to hello@veragentic.ai. No account or server of our own.
+    // Web3Forms relays the inquiry by email. FormData + Accept keeps this a simple CORS request (no preflight).
     var fd = new FormData(form);
-    fd.append('_subject', SUBJECT);
-    fd.append('_replyto', email);
-    fd.append('_template', 'box');
-    fd.append('_captcha', 'false');
+    fd.append('access_key', accessKey);
+    fd.append('subject', SUBJECT);
+    fd.append('from_name', 'veragentic.ai');
+    fd.append('replyto', email);
 
     fetch(endpoint, { method: 'POST', body: fd, headers: { Accept: 'application/json' } })
       .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
+        return res.json().catch(function () { throw new Error('HTTP ' + res.status); });
       })
       .then(function (data) {
-        // FormSubmit answers 200 with {success: "false"} when it did not send (e.g. before activation).
-        if (!data || String(data.success) !== 'true') throw new Error((data && data.message) || 'not sent');
+        if (!data || data.success !== true) throw new Error((data && data.message) || 'not sent');
         var done = document.createElement('div');
         done.className = 'form-success';
         done.setAttribute('role', 'status');

@@ -1,8 +1,9 @@
-// Veragentic site configuration. These two values are the only things to edit.
+// Veragentic site configuration. These values are the only things to edit.
 window.VERAGENTIC = Object.freeze({
   // Google Analytics 4 measurement ID, e.g. "G-XXXXXXXXXX". Empty = no GA script, no requests, no cookies.
   MEASUREMENT_ID: "",
-  // Email relay for the inquiry form (FormSubmit). Sends each inquiry to hello@veragentic.ai.
-  // Empty = the form opens a prefilled email to hello@veragentic.ai instead.
-  FORM_ENDPOINT: "https://formsubmit.co/ajax/hello@veragentic.ai"
+  // Web3Forms relays each inquiry by email. The access key is public by design (it only allows sending to its own inbox).
+  // Empty key = the form opens a prefilled email to hello@veragentic.ai instead.
+  FORM_ENDPOINT: "https://api.web3forms.com/submit",
+  FORM_ACCESS_KEY: ""
 });

@@ -31,18 +31,21 @@ Edit **`assets/js/config.js`**. It holds two strings and nothing else:
 
 ```js
 MEASUREMENT_ID: "",   // "G-XXXXXXXXXX" turns on GA4; empty = no GA script, no requests, no cookies
-FORM_ENDPOINT: "https://formsubmit.co/ajax/hello@veragentic.ai"   // empty = form opens a prefilled email instead
+FORM_ENDPOINT: "https://api.web3forms.com/submit",
+FORM_ACCESS_KEY: ""      // Web3Forms access key; empty = form opens a prefilled email instead
 ```
 
 If you ever switch form provider, also add its host to `connect-src` and `form-action` in the CSP `<meta>` in **both** `index.html` and `404.html`.
 
-## Form: email relay (FormSubmit)
+## Form: email relay (Web3Forms)
 
-The form posts to FormSubmit (formsubmit.co), which emails each inquiry to **hello@veragentic.ai**. No account, no server of our own.
+The form posts to Web3Forms, which emails each inquiry to the inbox the access key belongs to. No server of our own.
 
-1. **One-time activation:** the first inquiry sent from the live site triggers a "confirm your form" email to hello@veragentic.ai. Click the link once. Until then FormSubmit answers `success: "false"` and the page shows the "email us directly" fallback, so nothing is silently lost.
-2. Each inquiry arrives with the subject "Inquiry from veragentic.ai" and the visitor's address as Reply-To, so you can just hit reply.
-3. Optional: after activation, FormSubmit's email shows a random alias for the endpoint. Swap it into `FORM_ENDPOINT` (`https://formsubmit.co/ajax/<alias>`) if you'd rather not have the address in the page source (it's printed on the page anyway).
+1. Create a form at <https://app.web3forms.com> with the inbox that should receive inquiries, and copy its **access key**.
+2. Paste it into `FORM_ACCESS_KEY` in `assets/js/config.js` and push. The key is public by design: it can only send to its own inbox.
+3. Each inquiry arrives with the subject "Inquiry from veragentic.ai" and the visitor's address as Reply-To.
+
+Web3Forms only accepts submissions from browsers, so test it from the live site, not with curl.
 
 ## Google Analytics 4
 
