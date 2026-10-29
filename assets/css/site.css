@@ -351,7 +351,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   line-height: 1.6;
   color: var(--graphite);
 }
-.site-footer p { display: flex; flex-wrap: wrap; column-gap: .5em; }
+.site-footer p { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 1.5em; }
 .site-footer a { color: var(--graphite); text-underline-offset: .2em; }
 .site-footer a:hover { color: var(--ink); }
 .site-footer p > * { white-space: nowrap; }
