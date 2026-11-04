@@ -28,7 +28,6 @@ shot "$TMP/icon.html" 512 512 "$ROOT/icon-512.png"
 
 cat > "$TMP/og.html" <<EOF
 <!doctype html><meta charset="utf-8"><style>
-@font-face{font-family:"Source Serif 4";src:url("file://$ROOT/assets/fonts/source-serif-4.woff2") format("woff2");font-weight:400 600}
 html,body{margin:0}svg{display:block}
 </style>
 $(cat "$ROOT/assets/img/og.svg")

@@ -91,8 +91,8 @@ ok('js class swapped', s.htmlClass === 'js', s.htmlClass);
 ok('no cookies with GA off', s.cookie === '');
 const hosts = [...new Set(requests.map(u => new URL(u).host))];
 ok('only local requests with GA off', hosts.every(h => h === '127.0.0.1:8765'), hosts.join(','));
-ok('font loaded', await ev(`document.fonts.ready.then(()=>document.fonts.check('400 72px "Source Serif 4"') && [...document.fonts].some(f=>f.family.includes('Source Serif')&&f.status==='loaded'))`));
-ok('h1 uses Source Serif', (await ev(`getComputedStyle(document.querySelector('h1')).fontFamily`)).startsWith('"Source Serif 4"'));
+ok('no web fonts requested', await ev(`[...document.fonts].length === 0`));
+ok('h1 uses the sans stack', (await ev(`getComputedStyle(document.querySelector('h1')).fontFamily`)).startsWith('system-ui'));
 
 // CTA focus
 await ev(`document.querySelector('[data-cta=hero]').click()`);

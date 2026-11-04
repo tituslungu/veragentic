@@ -12,7 +12,6 @@ index.html                    the page (markup, meta, JSON-LD; no inline JS/CSS,
 assets/css/site.css           all styles, shared by both pages
 assets/js/config.js           THE edit point: MEASUREMENT_ID, FORM_ENDPOINT
 assets/js/main.js             GA loader, CTA focus/tracking, form validation + submit
-assets/fonts/                 Source Serif 4 (subset variable WOFF2) + OFL.txt licence
 assets/img/og.svg, og.png     social preview image (source + render)
 favicon.svg / favicon.ico / apple-touch-icon.png / icon-512.png
 robots.txt, sitemap.xml, CNAME, .nojekyll

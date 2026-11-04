@@ -15,7 +15,7 @@ sleep 1
 
 echo "== URLs"
 for p in / /404.html /assets/css/site.css /assets/js/config.js /assets/js/main.js \
-  /assets/fonts/source-serif-4.woff2 /assets/img/og.png /robots.txt /sitemap.xml \
+  /assets/img/og.png /robots.txt /sitemap.xml \
   /favicon.ico /favicon.svg /apple-touch-icon.png /icon-512.png; do
   printf '%s %s\n' "$(curl -s -o /dev/null -w '%{http_code}' "$BASE$p")" "$p"
 done
@@ -42,7 +42,7 @@ grep -Eiq 'terms of|privacy|cookie|consent|testimonial' index.html && echo "FAIL
 grep -q '© 2026 Veragentic' index.html && echo "PASS copyright" || echo "FAIL copyright"
 
 echo "== Budget (first-load set, bytes raw / gzip)"
-FILES="index.html assets/css/site.css assets/js/config.js assets/js/main.js assets/fonts/source-serif-4.woff2 favicon.svg favicon.ico"
+FILES="index.html assets/css/site.css assets/js/config.js assets/js/main.js favicon.svg favicon.ico"
 TOTAL=0; GZ=0
 for f in $FILES; do
   r=$(stat -c %s "$f"); g=$(gzip -9c "$f" | wc -c)
