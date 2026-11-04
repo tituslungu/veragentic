@@ -234,7 +234,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   margin-bottom: 1.5rem;
 }
 @media (min-width: 900px) {
-  .founder .wrap > .founder-photo { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+  .founder .wrap > .founder-photo { grid-column: 1; grid-row: 1; justify-self: end; margin-bottom: 0; }
   .founder .wrap > .content { grid-row: 1; }
 }
 .role { margin-top: .5rem; font-weight: 700; }
@@ -247,9 +247,6 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
 .facts div { display: flex; gap: .4em; }
 .facts dt { color: var(--graphite); font-weight: 600; }
 .facts dd { color: var(--ink); }
-@media (min-width: 600px) {
-  .facts { display: flex; flex-wrap: wrap; column-gap: 1.5rem; }
-}
 .founder-link {
   display: inline-flex;
   align-items: center;
