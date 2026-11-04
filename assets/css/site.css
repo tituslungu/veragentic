@@ -245,6 +245,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   line-height: 1.6;
 }
 .facts div { display: flex; gap: .4em; }
+.facts div + div { margin-top: .8em; } /* half a line of extra space between rows */
 .facts dt { color: var(--graphite); font-weight: 600; }
 .facts dd { color: var(--ink); }
 .founder-link {
