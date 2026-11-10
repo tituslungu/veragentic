@@ -16,7 +16,7 @@ sleep 1
 echo "== URLs"
 for p in / /404.html /assets/css/site.css /assets/js/config.js /assets/js/main.js \
   /assets/img/og.png /robots.txt /sitemap.xml \
-  /favicon.ico /favicon.svg /apple-touch-icon.png /icon-512.png; do
+  /favicon.ico /favicon.svg /apple-touch-icon.png /icon-192.png /icon-512.png; do
   printf '%s %s\n' "$(curl -s -o /dev/null -w '%{http_code}' "$BASE$p")" "$p"
 done
 
