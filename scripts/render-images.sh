@@ -18,7 +18,7 @@ wrap() { # $1 svg markup, $2 size px, $3 out html
 }
 
 ICON="$(cat "$ROOT/favicon.svg")"
-FULL_BLEED="${ICON/rx=\"6\" /}"
+FULL_BLEED="$(printf '%s' "$ICON" | sed -E 's/ rx="[^"]*"//')"
 
 wrap "$FULL_BLEED" 180 "$TMP/touch.html"
 shot "$TMP/touch.html" 180 180 "$ROOT/apple-touch-icon.png"
@@ -29,6 +29,8 @@ shot "$TMP/icon.html" 512 512 "$ROOT/icon-512.png"
 cat > "$TMP/og.html" <<EOF
 <!doctype html><meta charset="utf-8"><style>
 html,body{margin:0}svg{display:block}
+@font-face{font-family:"Veragentic Grotesk";src:url("file://$ROOT/assets/fonts/VeragenticGrotesk-Medium.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"Veragentic Grotesk";src:url("file://$ROOT/assets/fonts/VeragenticGrotesk-Regular.woff2") format("woff2");font-weight:400}
 </style>
 $(cat "$ROOT/assets/img/og.svg")
 EOF

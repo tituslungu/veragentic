@@ -1,16 +1,22 @@
 /* Veragentic: site styles. */
 
+/* Veragentic Grotesk (Inter fork, OFL; see /assets/fonts/OFL.txt). Latin web subset: tabular digits, proportional spaces and punctuation. */
+@font-face { font-family: "Veragentic Grotesk"; src: url("/assets/fonts/VeragenticGrotesk-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Veragentic Grotesk"; src: url("/assets/fonts/VeragenticGrotesk-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Veragentic Grotesk"; src: url("/assets/fonts/VeragenticGrotesk-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Veragentic Grotesk"; src: url("/assets/fonts/VeragenticGrotesk-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
 :root {
   color-scheme: light;
-  --paper: #FAF8F4;
+  --paper: #F6F5F1;
   --white: #FFFFFF;
   --ink: #14161A;
-  --graphite: #5B5E64;
-  --hairline: #D9D5CC;
+  --graphite: #55595F;
+  --hairline: #D2D1CF; /* Ink at ~16% over Paper */
   --field-border: #8A8C90;
   --navy: #1F3A5F;
   --error: #9B2C2C;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: "Veragentic Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --serif: var(--sans); /* all type is sans serif for now */
   --mono: var(--sans);
   --h2: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
@@ -37,7 +43,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection { background: #1F3A5F; color: #FAF8F4; }
+::selection { background: var(--navy); color: var(--paper); }
 
 h1, h2, h3, p, ul, dl, dd { margin: 0; }
 h1, h2, h3 { font-family: var(--sans); font-weight: 500; }
@@ -90,26 +96,17 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  min-height: 4rem;
-}
-@media (min-width: 600px) {
-  .site-header .wrap { min-height: 5rem; }
+  padding-top: clamp(1.75rem, 4vw, 2.75rem);
 }
 
+/* Wordmark: SVG with the letter breaks; scales with the viewport so it never wraps. */
 .wordmark {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-family: var(--sans);
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  text-decoration: none;
+  display: block;
+  width: min(26rem, 100%);
   color: var(--ink);
-  white-space: nowrap;
+  text-decoration: none;
 }
+.wordmark svg { display: block; width: 100%; height: auto; }
 .wordmark:hover { color: var(--navy); }
 
 .text-link {
@@ -158,7 +155,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
 
 /* 2 · Hero */
 .hero {
-  padding-top: clamp(4rem, 12vh, 9rem);
+  padding-top: clamp(3rem, 6vw, 4.5rem);
   padding-bottom: clamp(4rem, 10vw, 7.5rem);
 }
 .hero h1 {

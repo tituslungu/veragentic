@@ -42,7 +42,7 @@ grep -Eiq 'terms of|privacy|cookie|consent|testimonial' index.html && echo "FAIL
 grep -q '© 2026 Veragentic' index.html && echo "PASS copyright" || echo "FAIL copyright"
 
 echo "== Budget (first-load set, bytes raw / gzip)"
-FILES="index.html assets/css/site.css assets/js/config.js assets/js/main.js favicon.svg favicon.ico"
+FILES="index.html assets/css/site.css assets/fonts/VeragenticGrotesk-Regular.woff2 assets/fonts/VeragenticGrotesk-Medium.woff2 assets/js/config.js assets/js/main.js favicon.svg favicon.ico"
 TOTAL=0; GZ=0
 for f in $FILES; do
   r=$(stat -c %s "$f"); g=$(gzip -9c "$f" | wc -c)
@@ -59,8 +59,8 @@ def L(h):
     return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2]
 def cr(a,b):
     a,b=L(a),L(b); return (max(a,b)+0.05)/(min(a,b)+0.05)
-P,W="#FAF8F4","#FFFFFF"
-checks=[("ink",  "#14161A",4.5),("graphite","#5B5E64",4.5),("navy","#1F3A5F",4.5),("error","#9B2C2C",4.5),("field-border","#8A8C90",3.0)]
+P,W="#F6F5F1","#FFFFFF"
+checks=[("ink",  "#14161A",4.5),("graphite","#55595F",4.5),("navy","#1F3A5F",4.5),("error","#9B2C2C",4.5),("field-border","#8A8C90",3.0)]
 bad=0
 for n,c,t in checks:
     for bn,bg in (("paper",P),("white",W)):

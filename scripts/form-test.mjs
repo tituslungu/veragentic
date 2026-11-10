@@ -91,8 +91,9 @@ ok('js class swapped', s.htmlClass === 'js', s.htmlClass);
 ok('no cookies with GA off', s.cookie === '');
 const hosts = [...new Set(requests.map(u => new URL(u).host))];
 ok('only local requests with GA off', hosts.every(h => h === '127.0.0.1:8765'), hosts.join(','));
-ok('no web fonts requested', await ev(`[...document.fonts].length === 0`));
-ok('h1 uses the sans stack', (await ev(`getComputedStyle(document.querySelector('h1')).fontFamily`)).startsWith('system-ui'));
+ok('web fonts are self-hosted Veragentic Grotesk', await ev(`[...document.fonts].length > 0 && [...document.fonts].every(f => f.family.replace(/"/g, '') === 'Veragentic Grotesk')`));
+ok('h1 uses Veragentic Grotesk', (await ev(`getComputedStyle(document.querySelector('h1')).fontFamily`)).startsWith('"Veragentic Grotesk"'));
+ok('h1 font loaded', await ev(`document.fonts.ready.then(() => document.fonts.check('500 40px "Veragentic Grotesk"'))`));
 
 // CTA focus
 await ev(`document.querySelector('[data-cta=hero]').click()`);
