@@ -149,6 +149,9 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
 }
 .button:hover, .button:active { background: var(--navy); }
 .button[aria-disabled="true"] { cursor: progress; background: var(--navy); }
+.button-accent { background: var(--navy); }
+.button-accent:hover, .button-accent:active { background: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem 1rem; }
 @media (max-width: 599.98px) {
   .button { width: 100%; }
 }
@@ -172,7 +175,7 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   font-size: clamp(1.125rem, 1rem + .5vw, 1.3125rem);
   line-height: 1.55;
 }
-.hero .button { margin-top: 2.5rem; }
+.hero .actions { margin-top: 2.5rem; }
 
 /* Sections after the hero */
 .section {
@@ -251,6 +254,9 @@ a, button, input, textarea { transition: background-color .15s, color .15s, bord
   min-height: 44px;
   margin-top: 1rem;
 }
+.section-cta { margin-top: 2rem; }
+.founder-cta { display: flex; width: fit-content; margin-top: 1.25rem; }
+@media (max-width: 599.98px) { .founder-cta { width: 100%; } }
 
 /* 5 · Inquiry */
 #inquiry-title:focus { outline-offset: 6px; }

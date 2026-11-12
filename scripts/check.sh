@@ -74,6 +74,11 @@ PY
 echo "== Behaviour (form + GA, via Chrome DevTools Protocol)"
 node "$ROOT/scripts/form-test.mjs" "$BASE/"
 
+if [ "${CALENDLY:-1}" = 1 ]; then
+  echo "== Calendly popup (live network)"
+  node "$ROOT/scripts/calendly-test.mjs" "$BASE/" || true
+fi
+
 if [ "${LIGHTHOUSE:-0}" = 1 ]; then
   echo "== Lighthouse"
   mkdir -p .lighthouse

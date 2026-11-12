@@ -37,6 +37,38 @@
     });
   });
 
+  /* ---- Calendly: popup scheduler. Widget loads on first click; the plain link is the fallback. ---- */
+  var calendlyLoad = null;
+  function loadCalendly() {
+    if (!calendlyLoad) {
+      calendlyLoad = new Promise(function (resolve, reject) {
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(css);
+        var js = document.createElement('script');
+        js.src = 'https://assets.calendly.com/assets/external/widget.js';
+        js.async = true;
+        js.onload = resolve;
+        js.onerror = reject;
+        document.head.appendChild(js);
+      });
+    }
+    return calendlyLoad;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-calendly]'), function (a) {
+    a.addEventListener('click', function (e) {
+      track('calendly_click', { location: a.getAttribute('data-calendly') });
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      loadCalendly().then(function () {
+        window.Calendly.initPopupWidget({ url: a.href });
+      }, function () {
+        window.open(a.href, '_blank', 'noopener');
+      });
+    });
+  });
+
   /* ---- Inquiry form ---- */
   var form = document.getElementById('inquiry-form');
   if (!form) return;
